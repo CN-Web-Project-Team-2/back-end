@@ -95,6 +95,6 @@ userSchema.plugin(paginate);
 /**
  * @typedef User
  */
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("FirebaseUser", userSchema);
 
 module.exports = User;

@@ -1,14 +1,19 @@
 require('dotenv').config();
 const Joi = require('joi');
 
-
+const sanitizeRedisUrl = url => url.replace(/^(redis\:\/\/)/, '');
 
 const envVarsSchema = Joi.object()
   .keys({
     NODE_ENV: Joi.string().valid('production', 'development', 'test'),
     PORT: Joi.number().default(8000),
     MONGODB_URL: Joi.string().required().description('Mongo DB url'),
-  
+    REDIS_PORT: Joi.number().default(6379),
+    REDIS_HOST: Joi.string(),
+    REDIS_PASSWORD: Joi.string(),
+    REDIS_ENDPOINT_URI: Joi.string().default('127.0.0.1:6379').description('Redis url'),
+    MANAGEMENT_APP_URL: Joi.string().default('localhost:8092').description('Management App url'),
+    SHOP_APP_URL: Joi.string().required().description('Management App url'),
   })
   .unknown();
 

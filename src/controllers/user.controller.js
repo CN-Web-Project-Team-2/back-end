@@ -1,6 +1,6 @@
 const httpStatus = require('http-status');
-
-
+const { getAuth } = require("firebase-admin/auth");
+const firebaseApp = require('../configs/firebase');
 const jwt = require("jsonwebtoken");
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
@@ -41,7 +41,7 @@ const getToken = catchAsync(async (req, res) => {
   const { user: bodyUser } = req.body;
   try {
     if (bodyUser) {
-      const AUTH = getAuth();
+      const AUTH = getAuth(firebaseApp);
       const decodedUser = await AUTH.verifyIdToken(bodyUser.stsTokenManager.accessToken);
       if (decodedUser.uid != bodyUser.uid) throw new ApiError(httpStatus.FORBIDDEN, "detect cheat");
       let user = await userService.getUserById(bodyUser.uid);
