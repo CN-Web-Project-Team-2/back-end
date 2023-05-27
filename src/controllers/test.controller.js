@@ -34,11 +34,28 @@ const getTest = catchAsync(async (req, res) => {
 });
 
 
+const updateTest = catchAsync(async (req, res) => {
+  const test = await testService.updateTestById(req.params.testId, req.body);
+  res.send(test);
+});
 
+const deleteTest = catchAsync(async (req, res) => {
+  await testService.deleteTestById(req.params.testId);
+  res.status(httpStatus.NO_CONTENT).send();
+});
+
+const getResultTable = catchAsync(async (req, res) => {
+  const table = await testService.getResultTableById(req.params.testId, req.query.userId);
+  res.status(httpStatus.OK).send(table);
+});
 
 module.exports = {
   createTest,
   getTests,
   getTest,
+
+  updateTest,
+  deleteTest,
+  getResultTable,
   
 };
