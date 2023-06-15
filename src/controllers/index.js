@@ -4,3 +4,4 @@ module.exports.questionController = require('./question.controller');
 
 module.exports.testController = require('./test.controller');
 
+module.exports.answerSheetController = require('./answerSheet.controller');

@@ -122,10 +122,8 @@ module.exports = {
   createTest,
   queryTests,
   getTestById,
-  
   getTestByEmail,
   updateTestById,
   deleteTestById,
   getResultTableById,
-
 };
